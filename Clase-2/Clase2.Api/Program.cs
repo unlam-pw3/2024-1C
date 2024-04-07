@@ -10,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IResultadoServicio, ResultadoServicio>();
+builder.Services.AddSingleton<IEquiposServicio, EquipoServicio>();
 
 var app = builder.Build();
 
