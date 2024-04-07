@@ -1,0 +1,6 @@
+@ABM_equipos_HostAddress = http://localhost:5083
+
+GET {{ABM_equipos_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,5 +1,3 @@
-using Clase.Logica;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,9 +6,6 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-builder.Services.AddSingleton<IResultadoServicio, ResultadoServicio>();
-builder.Services.AddSingleton<IEquipoServicio, EquipoServicio>();
 
 var app = builder.Build();
 

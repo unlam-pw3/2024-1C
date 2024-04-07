@@ -5,11 +5,11 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clase2.WinForm", "Clase2.WinForm\Clase2.WinForm.csproj", "{9D445EDF-B190-4B3D-99FF-7FD8B9F1C3E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clase2.Api", "Clase2.Api\Clase2.Api.csproj", "{3CFEDCAF-5AA0-4136-89E5-93E7A7D95862}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clase2.Api", "Clase2.Api\Clase2.Api.csproj", "{3CFEDCAF-5AA0-4136-89E5-93E7A7D95862}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clase2.Entidades", "Clase2.Entidades\Clase2.Entidades.csproj", "{A91138E0-F84B-40F2-A64F-666C65FFEFEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clase2.Entidades", "Clase2.Entidades\Clase2.Entidades.csproj", "{A91138E0-F84B-40F2-A64F-666C65FFEFEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clase.Logica", "Clase.Logica\Clase.Logica.csproj", "{9AE67B9E-0F60-496D-9E0A-AF2B2CF049EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clase.Logica", "Clase.Logica\Clase.Logica.csproj", "{9AE67B9E-0F60-496D-9E0A-AF2B2CF049EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
