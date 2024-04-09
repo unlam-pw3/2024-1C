@@ -90,7 +90,13 @@ namespace Clase2.WinForm
             }
         }
 
-        private void registrarEquipo(object sender, LinkLabelLinkClickedEventArgs e)
+        private void cambiarAForm2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Form2 form2 = new Form2();
+            form2.Show();
+        }
+
+        private void txtEquipoLocal_TextChanged(object sender, EventArgs e)
         {
 
         }
