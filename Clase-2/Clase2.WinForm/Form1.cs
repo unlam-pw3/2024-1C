@@ -89,5 +89,10 @@ namespace Clase2.WinForm
                 }
             }
         }
+
+        private void registrarEquipo(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+
+        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Clase2.Entidades;
-
 namespace Clase.Logica;
 public interface IResultadoServicio
 {

@@ -7,3 +7,4 @@ public class Resultado
     public string GolesLocal { get; set; }
     public string GolesVisitante { get; set; }
 }
+
