@@ -24,8 +24,8 @@ namespace Clase2.Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Equipo equipo)
         {
-            _equipoServicio.Agregar(equipo);
-            return StatusCode(StatusCodes.Status201Created);
+            var equipoAgregado = _equipoServicio.Agregar(equipo);
+            return StatusCode(StatusCodes.Status201Created, equipoAgregado);
         }
 
         [HttpDelete("{nombre_equipo}")]
@@ -41,6 +41,30 @@ namespace Clase2.Api.Controllers
             return NoContent(); // Devolver 204 para indicar que el equipo se eliminó correctamente
         }
 
+        [HttpPut]
+        public IActionResult Put([FromBody] Equipo equipo)
+        {
+            var equipoEncontrado = _equipoServicio.ObtenerEquipoPorId(equipo.Id);
+            if (equipoEncontrado == null)
+            {
+                return NotFound(); // Devolver 404 si el equipo no se encuentra
+            }
+
+            _equipoServicio.Actualizar(equipo);
+            return Ok(); // Devolver 200 para indicar que el equipo se actualizó correctamente
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var equipoEncontrado = _equipoServicio.ObtenerEquipoPorId(id);
+            if (equipoEncontrado == null)
+            {
+                return NotFound(); // Devolver 404 si el equipo no se encuentra
+            }
+
+            return Ok(equipoEncontrado);
+        }
 
     }
 }

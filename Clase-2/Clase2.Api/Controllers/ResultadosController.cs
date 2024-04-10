@@ -27,5 +27,25 @@ namespace Clase2.Api.Controllers
             _resultadoServicio.Agregar(resultado);
             return StatusCode(StatusCodes.Status201Created);
         }
+
+        [HttpPut]
+        public IActionResult Put([FromBody] Resultado resultado)
+        {
+            _resultadoServicio.Actualizar(resultado);
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _resultadoServicio.Eliminar(id);
+            return Ok();
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            return Ok(_resultadoServicio.ObtenerPorId(id));
+        }
     }
 }
