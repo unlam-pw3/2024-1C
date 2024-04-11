@@ -2,6 +2,7 @@
 
 public class Resultado
 {
+    public int Id { get; set; }
     public string EquipoLocal { get; set; }
     public string EquipoVisitante { get; set; }
     public string GolesLocal { get; set; }

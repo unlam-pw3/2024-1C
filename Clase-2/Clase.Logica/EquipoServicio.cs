@@ -1,46 +1,65 @@
 ﻿using Clase2.Entidades;
-using System.Linq;
 
-namespace Clase.Logica
+namespace Clase.Logica;
+
+public interface IEquiposServicio
 {
-    public interface IEquiposServicio
+    void Actualizar(Equipo equipo);
+    Equipo Agregar(Equipo equipo);
+    List<Equipo> ObtenerEquipos();
+    void Eliminar(Equipo equipo);
+    Equipo ObtenerEquipoPorNombre(string nombre_equipo);
+    Equipo ObtenerEquipoPorId(int id);
+}
+public class EquipoServicio : IEquiposServicio
+{
+
+    private static List <Equipo> Lista { get; set; } = new List <Equipo> ();
+
+    public Equipo Agregar(Equipo equipo)
     {
-        void Agregar(Equipo equipo);
-        List<Equipo> ObtenerEquipos();
-        void Eliminar(Equipo equipo);
-        Equipo ObtenerEquipoPorNombre(string nombre_equipo);
+        equipo.Id = Lista.Count == 0 ? 1 : Lista.Max(i => i.Id) + 1;
+        Lista.Add (equipo);
+
+        return equipo;
     }
-    public class EquipoServicio : IEquiposServicio
+
+    public void Eliminar(Equipo equipo)
     {
+        Lista.Remove (equipo);
+    }
 
-        private static List <Equipo> Lista { get; set; } = new List <Equipo> ();
-
-        public void Agregar(Equipo equipo)
+    public Equipo ObtenerEquipoPorNombre(string nombre_equipo)
+    {
+        foreach (var equipo in Lista)
         {
-            Lista.Add (equipo);
-        }
-
-        public void Eliminar(Equipo equipo)
-        {
-            Lista.Remove (equipo);
-        }
-
-        public Equipo ObtenerEquipoPorNombre(string nombre_equipo)
-        {
-            foreach (var equipo in Lista)
+            if (equipo.nombre_equipo.Equals(nombre_equipo, StringComparison.OrdinalIgnoreCase))
             {
-                if (equipo.nombre_equipo.Equals(nombre_equipo, StringComparison.OrdinalIgnoreCase))
-                {
-                    return equipo;
-                }
+                return equipo;
             }
-
-            return null; // Si no se encuentra el equipo, devuelve null
         }
 
-        public List<Equipo> ObtenerEquipos()
+        return null; // Si no se encuentra el equipo, devuelve null
+    }
+
+    public Equipo ObtenerEquipoPorId(int id)
+    {
+        return Lista.FirstOrDefault(x => x.Id == id);
+    }
+
+    public List<Equipo> ObtenerEquipos()
+    {
+        return Lista;
+    }
+
+    public void Actualizar(Equipo equipo)
+    {
+        var item = Lista.FirstOrDefault(x => x.Id == equipo.Id);
+        if (item != null)
         {
-            return Lista;
+            item.nombre_equipo = equipo.nombre_equipo;
+            item.pais = equipo.pais;
         }
     }
+
 }

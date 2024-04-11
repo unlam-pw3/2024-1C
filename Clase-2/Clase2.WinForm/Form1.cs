@@ -141,7 +141,7 @@ namespace Clase2.WinForm
                         foreach (var equipo in equipos)
                         {
                             // Por ejemplo, agregar cada equipo a un DataGridView llamado gvEquipos
-                            AgregarEquipoAGrilla(gvEquipos, equipo.nombre_equipo, equipo.pais);
+                            AgregarEquipoAGrilla(gvEquipos, equipo);
                         }
                     }
                     else
@@ -158,15 +158,8 @@ namespace Clase2.WinForm
             }
         }
 
-        private async Task AgregarEquiposApi()
+        private async Task RealizarSolicitudHttpAsync(string url, HttpMethod metodo, string jsonBody)
         {
-            // URL de destino
-            string url = "https://localhost:7169/api/Equipos";
-
-            // Contenido del cuerpo (en este caso, un JSON)
-            string jsonBody = $"{{\"nombre_equipo\": \"{txtEquipoACargar.Text}\"," +
-                $"\"pais\": \"{txtPais.Text}\"}}";
-
             // Crear cliente HTTP
             using (HttpClient client = new HttpClient())
             {
@@ -179,14 +172,25 @@ namespace Clase2.WinForm
 
                 try
                 {
-                    // Realizar la solicitud POST
-                    HttpResponseMessage response = await client.PostAsync(url, bodyContent);
+                    // Realizar la solicitud HTTP
+                    HttpResponseMessage response = null;
+                    switch (metodo.Method)
+                    {
+                        case "POST":
+                            response = await client.PostAsync(url, bodyContent);
+                            break;
+                        case "PUT":
+                            response = await client.PutAsync(url, bodyContent);
+                            break;
+                        // Aquí puedes agregar más casos para otros métodos HTTP si es necesario
+                    }
 
                     // Verificar si la solicitud fue exitosa (código de estado 200 OK)
-                    if (response.IsSuccessStatusCode)
+                    if (response != null && response.IsSuccessStatusCode)
                     {
                         // Leer la respuesta
                         string responseBody = await response.Content.ReadAsStringAsync();
+
                         Console.WriteLine("Respuesta del servidor:");
                         Console.WriteLine(responseBody);
                         await ObtenerEquiposApi();
@@ -205,6 +209,19 @@ namespace Clase2.WinForm
             }
         }
 
+        private async Task AgregarEquiposApi()
+        {
+            // URL de destino
+            string url = "https://localhost:7169/api/Equipos";
+
+            // Contenido del cuerpo (en este caso, un JSON)
+            string jsonBody = $"{{\"nombre_equipo\": \"{txtEquipoACargar.Text}\"," +
+                              $"\"pais\": \"{txtPais.Text}\"}}";
+
+            // Realizar la solicitud POST
+            await RealizarSolicitudHttpAsync(url, HttpMethod.Post, jsonBody);
+        }
+
         private async Task EliminarEquiposApi()
         {
             string nombreEquipoAEliminar = ObtenerNombreEquipoSeleccionado();
@@ -218,7 +235,7 @@ namespace Clase2.WinForm
             try
             {
                 // URL de destino
-                string url = $"https://localhost:7169/api/Equipos/{nombreEquipoAEliminar}";
+                string url = $"https://localhost:7169/api/Equipos";
 
                 // Crear cliente HTTP
                 using (HttpClient client = new HttpClient())
@@ -250,6 +267,21 @@ namespace Clase2.WinForm
         }
 
 
+        private async Task ActualizarEquipoApi(Equipo equipo)
+        {
+            // URL de destino para actualizar un equipo (por ejemplo, se puede usar PUT)
+            string url = $"https://localhost:7169/api/Equipos";
+
+            // Contenido del cuerpo (en este caso, un JSON)
+            string jsonBody = $"{{\"nombre_equipo\": \"{equipo.nombre_equipo}\"," +
+                                $"\"id\": \"{equipo.Id}\"," +
+                              $"\"pais\": \"{equipo.pais}\"}}";
+
+            // Realizar la solicitud PUT para actualizar el equipo
+            await RealizarSolicitudHttpAsync(url, HttpMethod.Put, jsonBody);
+        }
+
+
         private String ObtenerNombreEquipoSeleccionado()
         {
             if (gvEquipos.CurrentRow != null)
@@ -264,18 +296,47 @@ namespace Clase2.WinForm
             }
         }
 
-        private void AgregarEquipoAGrilla(DataGridView gv, string nombreEquipo, string paisEquipo)
+        private void AgregarEquipoAGrilla(DataGridView gv, Equipo equipo)
         {
             // Crear una nueva fila
             DataGridViewRow fila = new DataGridViewRow();
             fila.CreateCells(gv);
 
             // Asignar valores a las celdas de la fila
-            fila.Cells[0].Value = nombreEquipo;
-            fila.Cells[1].Value = paisEquipo;
+            fila.Cells[0].Value = equipo.Id;
+            fila.Cells[1].Value = equipo.nombre_equipo;
+            fila.Cells[2].Value = equipo.pais;
 
             // Agregar la fila al DataGridView
             gv.Rows.Add(fila);
+        }
+
+        private void btnGuardarEquipos_Click(object sender, EventArgs e)
+        {
+            //recorrer grilla y actualizar
+            foreach (DataGridViewRow row in gvEquipos.Rows)
+            {
+                if (row.Cells[0].Value == null)
+                    continue;
+
+                // Obtener los valores de las celdas de la fila
+                string id = row.Cells[0].Value.ToString();
+                string nombre = row.Cells[1].Value.ToString();
+                string pais = row.Cells[2].Value.ToString();
+
+                // Crear un objeto Equipo con los valores de la fila
+                Equipo equipo = new Equipo
+                {
+                    Id = Int32.Parse(id),
+                    nombre_equipo = nombre,
+                    pais = pais
+                };
+
+                // Llamar al método para actualizar el equipo en la API
+                ActualizarEquipoApi(equipo);
+            }
+
+            ObtenerEquiposApi();
         }
     }
 }
