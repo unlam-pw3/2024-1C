@@ -270,7 +270,7 @@ namespace Clase2.WinForm
         private async Task ActualizarEquipoApi(Equipo equipo)
         {
             // URL de destino para actualizar un equipo (por ejemplo, se puede usar PUT)
-            string url = $"https://localhost:7169/api/Equipos/{equipo.Id}";
+            string url = $"https://localhost:7169/api/Equipos";
 
             // Contenido del cuerpo (en este caso, un JSON)
             string jsonBody = $"{{\"nombre_equipo\": \"{equipo.nombre_equipo}\"," +
