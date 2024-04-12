@@ -87,5 +87,15 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CRUD.Equipos.Entidades\CRUD.Equipos.Entidades.csproj">
+      <Project>{6a1a4afd-025a-4283-b206-d269dd7b0c94}</Project>
+      <Name>CRUD.Equipos.Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CRUD.Equipos.Services\CRUD.Equipos.Services.csproj">
+      <Project>{9b70eb7e-141c-487e-a701-d18dedc984c6}</Project>
+      <Name>CRUD.Equipos.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

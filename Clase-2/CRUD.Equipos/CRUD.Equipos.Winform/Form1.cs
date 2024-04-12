@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json;
+using CRUD.Equipos.Service;
+using CRUD.Equipos.Entidades;
 
 namespace CRUD.Equipos.Winform
 {
@@ -13,6 +13,8 @@ namespace CRUD.Equipos.Winform
         public Form1() 
         {
             InitializeComponent();
+            _equipoServicio = new EquipoServicio();
+            _equipoServicio.EquipoAgregado += EquipoServicio_EquipoAgregado;
         }
 
         private async Task AgregarFila(DataGridView gv, string nombre, string pais)
@@ -61,6 +63,11 @@ namespace CRUD.Equipos.Winform
                     Console.WriteLine($"Error al realizar la solicitud: {ex.Message}");
                 }
             }
+        }
+
+        private void EquipoServicio_EquipoAgregado(object sender, Equipo equipo)
+        {
+            AgregarFila(gvEquipo, equipo.Nombre, equipo.Pais);
         }
 
         private async void btnEnviar_Click_1(object sender, EventArgs e)

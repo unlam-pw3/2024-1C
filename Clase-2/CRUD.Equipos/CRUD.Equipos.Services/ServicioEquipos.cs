@@ -5,6 +5,7 @@ namespace CRUD.Equipos.Services
 {
     public interface IEquipoServicio
     {
+        public event EventHandler<Equipo> EquipoAgregado;
         void Agregar(Equipo equipo);
         void Eliminar(Equipo equipo);
         List<Equipo> ObtenerTodos();
@@ -12,11 +13,14 @@ namespace CRUD.Equipos.Services
 
     public class EquipoServicio : IEquipoServicio
     {
+        public event EventHandler<Equipo> EquipoAgregado;
+
         private static List<Equipo> Items { get; set; } = new List<Equipo>();
 
         public void Agregar(Equipo equipo)
         {
             Items.Add(equipo);
+            EquipoAgregado?.Invoke(this, equipo);
         }
 
         public List<Equipo> ObtenerTodos()
@@ -29,4 +33,5 @@ namespace CRUD.Equipos.Services
             Items.Remove(equipo);
         }
     }
+
 }
