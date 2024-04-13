@@ -25,20 +25,22 @@ namespace Clase2.WinForm
             EnviarResultadoAApi();
 
 
-            AgregarFila(gvResultados, txtEquipoLocal.Text, $"{cboGolesLocal.Text}-{cboGolesVisitante.Text}", txtEquipoVisitante.Text);
+            AgregarFila(gvResultados, txtEquipoLocal.Text, cboGolesLocal.Text, cboGolesVisitante.Text, txtEquipoVisitante.Text);
             txtEquipoLocal.Text = txtEquipoVisitante.Text = "";
         }
 
-        private void AgregarFila(DataGridView gv, string equipoLocal, string goles, string equipoVisitante)
+        private void AgregarFila(DataGridView gv, string equipoLocal, string golLocal, string golVisitante, string equipoVisitante)
         {
             // Crear una nueva fila
             DataGridViewRow fila = new DataGridViewRow();
             fila.CreateCells(gv);
 
             // Asignar valores a las celdas de la fila
-            fila.Cells[0].Value = equipoLocal;
-            fila.Cells[1].Value = goles;
-            fila.Cells[2].Value = equipoVisitante;
+            //fila.Cells[0].Value = equipoLocal;
+            fila.Cells[1].Value = equipoLocal;
+            fila.Cells[2].Value = golLocal;
+            fila.Cells[3].Value = golVisitante;
+            fila.Cells[4].Value = equipoVisitante;
 
             // Agregar la fila al DataGridView
             gv.Rows.Add(fila);
@@ -158,6 +160,56 @@ namespace Clase2.WinForm
             }
         }
 
+        private async Task ObtenerResultadosApi()
+        {
+            // URL de destino
+            string url = "https://localhost:7169/api/Resultados";
+
+            try
+            {
+                // Crear cliente HTTP
+                using (HttpClient client = new HttpClient())
+                {
+                    // Configurar encabezados si es necesario (por ejemplo, para indicar el tipo de contenido)
+                    client.DefaultRequestHeaders.Add("Accept", "application/json");
+                    client.DefaultRequestHeaders.Add("User-Agent", "MyApp");
+
+                    // Realizar la solicitud GET
+                    HttpResponseMessage response = await client.GetAsync(url);
+
+                    // Verificar si la solicitud fue exitosa (código de estado 200 OK)
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Leer la respuesta
+                        string responseBody = await response.Content.ReadAsStringAsync();
+
+                        // Aquí puedes manejar la respuesta, por ejemplo, deserializar el JSON si es necesario
+                        // Supongamos que la respuesta es una lista de objetos de tipo Equipo en formato JSON
+                        List<Resultado> resultados = JsonConvert.DeserializeObject<List<Resultado>>(responseBody);
+
+                        gvResultados.Rows.Clear();
+
+                        // Puedes hacer lo que necesites con la lista de equipos, como mostrarla en un DataGridView
+                        foreach (var res in resultados)
+                        {
+                            // Por ejemplo, agregar cada equipo a un DataGridView llamado gvEquipos
+                            AgregarResultadoAGrilla(gvResultados, res);
+                        }
+                    }
+                    else
+                    {
+                        // Manejar errores de solicitud
+                        Console.WriteLine($"La solicitud falló con el código de estado: {response.StatusCode}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar errores de red o de la solicitud
+                Console.WriteLine($"Error al realizar la solicitud: {ex.Message}");
+            }
+        }
+
         private async Task RealizarSolicitudHttpAsync(string url, HttpMethod metodo, string jsonBody)
         {
             // Crear cliente HTTP
@@ -182,7 +234,7 @@ namespace Clase2.WinForm
                         case "PUT":
                             response = await client.PutAsync(url, bodyContent);
                             break;
-                        // Aquí puedes agregar más casos para otros métodos HTTP si es necesario
+                            // Aquí puedes agregar más casos para otros métodos HTTP si es necesario
                     }
 
                     // Verificar si la solicitud fue exitosa (código de estado 200 OK)
@@ -281,6 +333,22 @@ namespace Clase2.WinForm
             await RealizarSolicitudHttpAsync(url, HttpMethod.Put, jsonBody);
         }
 
+        private async Task ActualizarResultadoApi(Resultado resultado)
+        {
+            // URL de destino para actualizar un resultado (por ejemplo, se puede usar PUT)
+            string url = $"https://localhost:7169/api/Resultados";
+
+            // Contenido del cuerpo (en este caso, un JSON)
+            string jsonBody = $"{{\"id\": \"{resultado.Id}\"," +
+                                $"\"equipoLocal\": \"{resultado.EquipoLocal}\"," +
+                              $"\"golesLocal\": \"{resultado.GolesLocal}\"," +
+                              $"\"golesVisitante\": \"{resultado.GolesVisitante}\"," +
+                              $"\"equipoVisitante\": \"{resultado.EquipoVisitante}\"}}";
+
+            // Realizar la solicitud PUT para actualizar el equipo
+            await RealizarSolicitudHttpAsync(url, HttpMethod.Put, jsonBody);
+        }
+
 
         private String ObtenerNombreEquipoSeleccionado()
         {
@@ -306,6 +374,23 @@ namespace Clase2.WinForm
             fila.Cells[0].Value = equipo.Id;
             fila.Cells[1].Value = equipo.nombre_equipo;
             fila.Cells[2].Value = equipo.pais;
+
+            // Agregar la fila al DataGridView
+            gv.Rows.Add(fila);
+        }
+
+        private void AgregarResultadoAGrilla(DataGridView gv, Resultado res)
+        {
+            // Crear una nueva fila
+            DataGridViewRow fila = new DataGridViewRow();
+            fila.CreateCells(gv);
+
+            // Asignar valores a las celdas de la fila
+            fila.Cells[0].Value = res.Id;
+            fila.Cells[1].Value = res.EquipoLocal;
+            fila.Cells[2].Value = res.GolesLocal;
+            fila.Cells[3].Value = res.GolesVisitante;
+            fila.Cells[4].Value = res.EquipoVisitante;
 
             // Agregar la fila al DataGridView
             gv.Rows.Add(fila);
@@ -337,6 +422,38 @@ namespace Clase2.WinForm
             }
 
             ObtenerEquiposApi();
+        }
+
+        private void btnGuardarResultados_Click(object sender, EventArgs e)
+        {
+            //recorrer grilla y actualizar
+            foreach (DataGridViewRow row in gvResultados.Rows)
+            {
+                if (row.Cells[0].Value == null)
+                    continue;
+
+                // Obtener los valores de las celdas de la fila
+                string id = row.Cells[0].Value.ToString();
+                string equipoLocal = row.Cells[1].Value.ToString();
+                string golLocal = row.Cells[2].Value.ToString();
+                string golVisitante = row.Cells[3].Value.ToString();
+                string equipoVisitante = row.Cells[4].Value.ToString();
+
+                // Crear un objeto Equipo con los valores de la fila
+                Resultado resultado = new Resultado
+                {
+                    Id = Int32.Parse(id),
+                    EquipoLocal = equipoLocal,
+                    GolesLocal = golLocal,
+                    GolesVisitante = golVisitante,
+                    EquipoVisitante = equipoVisitante
+                };
+
+                // Llamar al método para actualizar el equipo en la API
+                ActualizarResultadoApi(resultado);
+            }
+
+            ObtenerResultadosApi();
         }
     }
 }

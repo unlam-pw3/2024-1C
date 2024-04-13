@@ -28,346 +28,358 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnCargarResultado = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtEquipoVisitante = new System.Windows.Forms.TextBox();
-            this.cboGolesVisitante = new System.Windows.Forms.ComboBox();
-            this.gvResultados = new System.Windows.Forms.DataGridView();
-            this.Local = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Goles = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Visitante = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cboGolesLocal = new System.Windows.Forms.ComboBox();
-            this.txtEquipoLocal = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtEquipoACargar = new System.Windows.Forms.TextBox();
-            this.btnCargarEquipo = new System.Windows.Forms.Button();
-            this.btnEliminarEquipo = new System.Windows.Forms.Button();
-            this.btnObtenerEquipos = new System.Windows.Forms.Button();
-            this.gvEquipos = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtPais = new System.Windows.Forms.TextBox();
-            this.btnGuardarEquipos = new System.Windows.Forms.Button();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Equipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pais = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gvResultados)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gvEquipos)).BeginInit();
-            this.SuspendLayout();
+            btnCargarResultado = new Button();
+            label1 = new Label();
+            label3 = new Label();
+            groupBox2 = new GroupBox();
+            label4 = new Label();
+            txtEquipoVisitante = new TextBox();
+            cboGolesVisitante = new ComboBox();
+            gvResultados = new DataGridView();
+            cboGolesLocal = new ComboBox();
+            txtEquipoLocal = new TextBox();
+            label2 = new Label();
+            groupBox1 = new GroupBox();
+            txtEquipoACargar = new TextBox();
+            btnCargarEquipo = new Button();
+            btnEliminarEquipo = new Button();
+            btnObtenerEquipos = new Button();
+            gvEquipos = new DataGridView();
+            Id = new DataGridViewTextBoxColumn();
+            Equipo = new DataGridViewTextBoxColumn();
+            Pais = new DataGridViewTextBoxColumn();
+            label5 = new Label();
+            label6 = new Label();
+            txtPais = new TextBox();
+            btnGuardarEquipos = new Button();
+            btnGuardarResultados = new Button();
+            IdRes = new DataGridViewTextBoxColumn();
+            Local = new DataGridViewTextBoxColumn();
+            gLocal = new DataGridViewTextBoxColumn();
+            gVisitante = new DataGridViewTextBoxColumn();
+            Visitante = new DataGridViewTextBoxColumn();
+            groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gvResultados).BeginInit();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gvEquipos).BeginInit();
+            SuspendLayout();
             // 
             // btnCargarResultado
             // 
-            this.btnCargarResultado.Location = new System.Drawing.Point(301, 502);
-            this.btnCargarResultado.Name = "btnCargarResultado";
-            this.btnCargarResultado.Size = new System.Drawing.Size(211, 33);
-            this.btnCargarResultado.TabIndex = 1;
-            this.btnCargarResultado.Text = "Cargar Resultado";
-            this.btnCargarResultado.UseVisualStyleBackColor = true;
+            btnCargarResultado.Location = new Point(211, 301);
+            btnCargarResultado.Margin = new Padding(2);
+            btnCargarResultado.Name = "btnCargarResultado";
+            btnCargarResultado.Size = new Size(148, 23);
+            btnCargarResultado.TabIndex = 1;
+            btnCargarResultado.Text = "Cargar Resultado";
+            btnCargarResultado.UseVisualStyleBackColor = true;
+            btnCargarResultado.Click += btnCargarResultado_Click;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(73, 362);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 25);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Equipo:";
+            label1.AutoSize = true;
+            label1.Location = new Point(51, 217);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(47, 15);
+            label1.TabIndex = 2;
+            label1.Text = "Equipo:";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(441, 362);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 25);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Equipo:";
+            label3.AutoSize = true;
+            label3.Location = new Point(309, 217);
+            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(47, 15);
+            label3.TabIndex = 5;
+            label3.Text = "Equipo:";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.txtEquipoVisitante);
-            this.groupBox2.Controls.Add(this.cboGolesVisitante);
-            this.groupBox2.Location = new System.Drawing.Point(430, 327);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(321, 155);
-            this.groupBox2.TabIndex = 6;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Visitante";
+            groupBox2.Controls.Add(label4);
+            groupBox2.Controls.Add(txtEquipoVisitante);
+            groupBox2.Controls.Add(cboGolesVisitante);
+            groupBox2.Location = new Point(301, 196);
+            groupBox2.Margin = new Padding(2);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new Padding(2);
+            groupBox2.Size = new Size(225, 93);
+            groupBox2.TabIndex = 6;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Visitante";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 82);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 25);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Goles:";
+            label4.AutoSize = true;
+            label4.Location = new Point(8, 49);
+            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(39, 15);
+            label4.TabIndex = 5;
+            label4.Text = "Goles:";
             // 
             // txtEquipoVisitante
             // 
-            this.txtEquipoVisitante.Location = new System.Drawing.Point(104, 35);
-            this.txtEquipoVisitante.Name = "txtEquipoVisitante";
-            this.txtEquipoVisitante.Size = new System.Drawing.Size(200, 31);
-            this.txtEquipoVisitante.TabIndex = 3;
+            txtEquipoVisitante.Location = new Point(73, 21);
+            txtEquipoVisitante.Margin = new Padding(2);
+            txtEquipoVisitante.Name = "txtEquipoVisitante";
+            txtEquipoVisitante.Size = new Size(141, 23);
+            txtEquipoVisitante.TabIndex = 3;
             // 
             // cboGolesVisitante
             // 
-            this.cboGolesVisitante.FormattingEnabled = true;
-            this.cboGolesVisitante.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10"});
-            this.cboGolesVisitante.Location = new System.Drawing.Point(104, 78);
-            this.cboGolesVisitante.Name = "cboGolesVisitante";
-            this.cboGolesVisitante.Size = new System.Drawing.Size(200, 33);
-            this.cboGolesVisitante.TabIndex = 0;
+            cboGolesVisitante.FormattingEnabled = true;
+            cboGolesVisitante.Items.AddRange(new object[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" });
+            cboGolesVisitante.Location = new Point(73, 47);
+            cboGolesVisitante.Margin = new Padding(2);
+            cboGolesVisitante.Name = "cboGolesVisitante";
+            cboGolesVisitante.Size = new Size(141, 23);
+            cboGolesVisitante.TabIndex = 0;
             // 
             // gvResultados
             // 
-            this.gvResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvResultados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Local,
-            this.Goles,
-            this.Visitante});
-            this.gvResultados.Location = new System.Drawing.Point(114, 565);
-            this.gvResultados.Name = "gvResultados";
-            this.gvResultados.RowHeadersWidth = 62;
-            this.gvResultados.RowTemplate.Height = 33;
-            this.gvResultados.Size = new System.Drawing.Size(637, 225);
-            this.gvResultados.TabIndex = 7;
-            // 
-            // Local
-            // 
-            this.Local.HeaderText = "Local";
-            this.Local.MinimumWidth = 8;
-            this.Local.Name = "Local";
-            this.Local.ReadOnly = true;
-            this.Local.Width = 150;
-            // 
-            // Goles
-            // 
-            this.Goles.HeaderText = "Goles";
-            this.Goles.MinimumWidth = 8;
-            this.Goles.Name = "Goles";
-            this.Goles.ReadOnly = true;
-            this.Goles.Width = 150;
-            // 
-            // Visitante
-            // 
-            this.Visitante.HeaderText = "Visitante";
-            this.Visitante.MinimumWidth = 8;
-            this.Visitante.Name = "Visitante";
-            this.Visitante.ReadOnly = true;
-            this.Visitante.Width = 150;
+            gvResultados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gvResultados.Columns.AddRange(new DataGridViewColumn[] { IdRes, Local, gLocal, gVisitante, Visitante });
+            gvResultados.Location = new Point(103, 340);
+            gvResultados.Margin = new Padding(2);
+            gvResultados.Name = "gvResultados";
+            gvResultados.RowHeadersWidth = 62;
+            gvResultados.RowTemplate.Height = 33;
+            gvResultados.Size = new Size(389, 135);
+            gvResultados.TabIndex = 7;
             // 
             // cboGolesLocal
             // 
-            this.cboGolesLocal.FormattingEnabled = true;
-            this.cboGolesLocal.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10"});
-            this.cboGolesLocal.Location = new System.Drawing.Point(104, 78);
-            this.cboGolesLocal.Name = "cboGolesLocal";
-            this.cboGolesLocal.Size = new System.Drawing.Size(200, 33);
-            this.cboGolesLocal.TabIndex = 0;
+            cboGolesLocal.FormattingEnabled = true;
+            cboGolesLocal.Items.AddRange(new object[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" });
+            cboGolesLocal.Location = new Point(73, 47);
+            cboGolesLocal.Margin = new Padding(2);
+            cboGolesLocal.Name = "cboGolesLocal";
+            cboGolesLocal.Size = new Size(141, 23);
+            cboGolesLocal.TabIndex = 0;
             // 
             // txtEquipoLocal
             // 
-            this.txtEquipoLocal.Location = new System.Drawing.Point(104, 35);
-            this.txtEquipoLocal.Name = "txtEquipoLocal";
-            this.txtEquipoLocal.Size = new System.Drawing.Size(200, 31);
-            this.txtEquipoLocal.TabIndex = 3;
+            txtEquipoLocal.Location = new Point(73, 21);
+            txtEquipoLocal.Margin = new Padding(2);
+            txtEquipoLocal.Name = "txtEquipoLocal";
+            txtEquipoLocal.Size = new Size(141, 23);
+            txtEquipoLocal.TabIndex = 3;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 82);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 25);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Goles:";
+            label2.AutoSize = true;
+            label2.Location = new Point(8, 49);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(39, 15);
+            label2.TabIndex = 5;
+            label2.Text = "Goles:";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.txtEquipoLocal);
-            this.groupBox1.Controls.Add(this.cboGolesLocal);
-            this.groupBox1.Location = new System.Drawing.Point(61, 327);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(321, 155);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Local";
+            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(txtEquipoLocal);
+            groupBox1.Controls.Add(cboGolesLocal);
+            groupBox1.Location = new Point(43, 196);
+            groupBox1.Margin = new Padding(2);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new Padding(2);
+            groupBox1.Size = new Size(225, 93);
+            groupBox1.TabIndex = 4;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Local";
             // 
             // txtEquipoACargar
             // 
-            this.txtEquipoACargar.Location = new System.Drawing.Point(147, 55);
-            this.txtEquipoACargar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtEquipoACargar.Name = "txtEquipoACargar";
-            this.txtEquipoACargar.Size = new System.Drawing.Size(180, 31);
-            this.txtEquipoACargar.TabIndex = 8;
+            txtEquipoACargar.Location = new Point(103, 33);
+            txtEquipoACargar.Name = "txtEquipoACargar";
+            txtEquipoACargar.Size = new Size(127, 23);
+            txtEquipoACargar.TabIndex = 8;
             // 
             // btnCargarEquipo
             // 
-            this.btnCargarEquipo.Location = new System.Drawing.Point(149, 192);
-            this.btnCargarEquipo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnCargarEquipo.Name = "btnCargarEquipo";
-            this.btnCargarEquipo.Size = new System.Drawing.Size(81, 38);
-            this.btnCargarEquipo.TabIndex = 9;
-            this.btnCargarEquipo.Text = "Agregar";
-            this.btnCargarEquipo.UseVisualStyleBackColor = true;
-            this.btnCargarEquipo.Click += new System.EventHandler(this.btnCargarEquipo_Click);
+            btnCargarEquipo.Location = new Point(104, 115);
+            btnCargarEquipo.Name = "btnCargarEquipo";
+            btnCargarEquipo.Size = new Size(57, 23);
+            btnCargarEquipo.TabIndex = 9;
+            btnCargarEquipo.Text = "Agregar";
+            btnCargarEquipo.UseVisualStyleBackColor = true;
+            btnCargarEquipo.Click += btnCargarEquipo_Click;
             // 
             // btnEliminarEquipo
             // 
-            this.btnEliminarEquipo.Location = new System.Drawing.Point(241, 192);
-            this.btnEliminarEquipo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnEliminarEquipo.Name = "btnEliminarEquipo";
-            this.btnEliminarEquipo.Size = new System.Drawing.Size(87, 38);
-            this.btnEliminarEquipo.TabIndex = 10;
-            this.btnEliminarEquipo.Text = "Eliminar";
-            this.btnEliminarEquipo.UseVisualStyleBackColor = true;
-            this.btnEliminarEquipo.Click += new System.EventHandler(this.btnEliminarEquipo_Click);
+            btnEliminarEquipo.Location = new Point(169, 115);
+            btnEliminarEquipo.Name = "btnEliminarEquipo";
+            btnEliminarEquipo.Size = new Size(61, 23);
+            btnEliminarEquipo.TabIndex = 10;
+            btnEliminarEquipo.Text = "Eliminar";
+            btnEliminarEquipo.UseVisualStyleBackColor = true;
+            btnEliminarEquipo.Click += btnEliminarEquipo_Click;
             // 
             // btnObtenerEquipos
             // 
-            this.btnObtenerEquipos.Location = new System.Drawing.Point(190, 240);
-            this.btnObtenerEquipos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnObtenerEquipos.Name = "btnObtenerEquipos";
-            this.btnObtenerEquipos.Size = new System.Drawing.Size(87, 38);
-            this.btnObtenerEquipos.TabIndex = 11;
-            this.btnObtenerEquipos.Text = "Obtener";
-            this.btnObtenerEquipos.UseVisualStyleBackColor = true;
-            this.btnObtenerEquipos.Click += new System.EventHandler(this.btnObtenerEquipos_Click);
+            btnObtenerEquipos.Location = new Point(133, 144);
+            btnObtenerEquipos.Name = "btnObtenerEquipos";
+            btnObtenerEquipos.Size = new Size(61, 23);
+            btnObtenerEquipos.TabIndex = 11;
+            btnObtenerEquipos.Text = "Obtener";
+            btnObtenerEquipos.UseVisualStyleBackColor = true;
+            btnObtenerEquipos.Click += btnObtenerEquipos_Click;
             // 
             // gvEquipos
             // 
-            this.gvEquipos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvEquipos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
-            this.Equipo,
-            this.Pais});
-            this.gvEquipos.Location = new System.Drawing.Point(430, 55);
-            this.gvEquipos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gvEquipos.Name = "gvEquipos";
-            this.gvEquipos.RowHeadersWidth = 62;
-            this.gvEquipos.RowTemplate.Height = 25;
-            this.gvEquipos.Size = new System.Drawing.Size(364, 175);
-            this.gvEquipos.TabIndex = 12;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(73, 60);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(72, 25);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Equipo:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(73, 112);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(46, 25);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Pais:";
-            // 
-            // txtPais
-            // 
-            this.txtPais.Location = new System.Drawing.Point(147, 113);
-            this.txtPais.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtPais.Name = "txtPais";
-            this.txtPais.Size = new System.Drawing.Size(180, 31);
-            this.txtPais.TabIndex = 15;
-            // 
-            // btnGuardarEquipos
-            // 
-            this.btnGuardarEquipos.Location = new System.Drawing.Point(296, 241);
-            this.btnGuardarEquipos.Name = "btnGuardarEquipos";
-            this.btnGuardarEquipos.Size = new System.Drawing.Size(112, 34);
-            this.btnGuardarEquipos.TabIndex = 16;
-            this.btnGuardarEquipos.Text = "Guardar Equipos";
-            this.btnGuardarEquipos.UseVisualStyleBackColor = true;
-            this.btnGuardarEquipos.Click += new System.EventHandler(this.btnGuardarEquipos_Click);
+            gvEquipos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gvEquipos.Columns.AddRange(new DataGridViewColumn[] { Id, Equipo, Pais });
+            gvEquipos.Location = new Point(301, 33);
+            gvEquipos.Name = "gvEquipos";
+            gvEquipos.RowHeadersWidth = 62;
+            gvEquipos.RowTemplate.Height = 25;
+            gvEquipos.Size = new Size(255, 105);
+            gvEquipos.TabIndex = 12;
             // 
             // Id
             // 
-            this.Id.HeaderText = "Id";
-            this.Id.MinimumWidth = 8;
-            this.Id.Name = "Id";
-            this.Id.Visible = false;
-            this.Id.Width = 150;
+            Id.HeaderText = "Id";
+            Id.MinimumWidth = 8;
+            Id.Name = "Id";
+            Id.Visible = false;
+            Id.Width = 150;
             // 
             // Equipo
             // 
-            this.Equipo.HeaderText = "Equipo";
-            this.Equipo.MinimumWidth = 8;
-            this.Equipo.Name = "Equipo";
-            this.Equipo.Width = 150;
+            Equipo.HeaderText = "Equipo";
+            Equipo.MinimumWidth = 8;
+            Equipo.Name = "Equipo";
+            Equipo.Width = 150;
             // 
             // Pais
             // 
-            this.Pais.HeaderText = "Pais";
-            this.Pais.MinimumWidth = 8;
-            this.Pais.Name = "Pais";
-            this.Pais.Width = 150;
+            Pais.HeaderText = "Pais";
+            Pais.MinimumWidth = 8;
+            Pais.Name = "Pais";
+            Pais.Width = 150;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(51, 36);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(47, 15);
+            label5.TabIndex = 13;
+            label5.Text = "Equipo:";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(51, 67);
+            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(31, 15);
+            label6.TabIndex = 14;
+            label6.Text = "Pais:";
+            // 
+            // txtPais
+            // 
+            txtPais.Location = new Point(103, 68);
+            txtPais.Name = "txtPais";
+            txtPais.Size = new Size(127, 23);
+            txtPais.TabIndex = 15;
+            // 
+            // btnGuardarEquipos
+            // 
+            btnGuardarEquipos.Location = new Point(207, 145);
+            btnGuardarEquipos.Margin = new Padding(2);
+            btnGuardarEquipos.Name = "btnGuardarEquipos";
+            btnGuardarEquipos.Size = new Size(78, 20);
+            btnGuardarEquipos.TabIndex = 16;
+            btnGuardarEquipos.Text = "Guardar Equipos";
+            btnGuardarEquipos.UseVisualStyleBackColor = true;
+            btnGuardarEquipos.Click += btnGuardarEquipos_Click;
+            // 
+            // btnGuardarResultados
+            // 
+            btnGuardarResultados.Location = new Point(207, 491);
+            btnGuardarResultados.Name = "btnGuardarResultados";
+            btnGuardarResultados.Size = new Size(156, 23);
+            btnGuardarResultados.TabIndex = 17;
+            btnGuardarResultados.Text = "Guardar resultados";
+            btnGuardarResultados.UseVisualStyleBackColor = true;
+            btnGuardarResultados.Click += btnGuardarResultados_Click;
+            // 
+            // IdRes
+            // 
+            IdRes.HeaderText = "IdRes";
+            IdRes.Name = "IdRes";
+            IdRes.Visible = false;
+            // 
+            // Local
+            // 
+            Local.FillWeight = 60F;
+            Local.HeaderText = "Local";
+            Local.MinimumWidth = 8;
+            Local.Name = "Local";
+            Local.ReadOnly = true;
+            // 
+            // gLocal
+            // 
+            gLocal.FillWeight = 60F;
+            gLocal.HeaderText = "gLocal";
+            gLocal.Name = "gLocal";
+            gLocal.Width = 60;
+            // 
+            // gVisitante
+            // 
+            gVisitante.FillWeight = 60F;
+            gVisitante.HeaderText = "gVisitante";
+            gVisitante.MinimumWidth = 8;
+            gVisitante.Name = "gVisitante";
+            gVisitante.ReadOnly = true;
+            gVisitante.Width = 65;
+            // 
+            // Visitante
+            // 
+            Visitante.FillWeight = 60F;
+            Visitante.HeaderText = "Visitante";
+            Visitante.MinimumWidth = 8;
+            Visitante.Name = "Visitante";
+            Visitante.ReadOnly = true;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(870, 840);
-            this.Controls.Add(this.btnGuardarEquipos);
-            this.Controls.Add(this.txtPais);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.gvEquipos);
-            this.Controls.Add(this.btnObtenerEquipos);
-            this.Controls.Add(this.btnEliminarEquipo);
-            this.Controls.Add(this.btnCargarEquipo);
-            this.Controls.Add(this.txtEquipoACargar);
-            this.Controls.Add(this.gvResultados);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnCargarResultado);
-            this.Controls.Add(this.groupBox1);
-            this.Name = "Form1";
-            this.Text = "Admin de Resultados";
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gvResultados)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gvEquipos)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.GradientInactiveCaption;
+            ClientSize = new Size(609, 560);
+            Controls.Add(btnGuardarResultados);
+            Controls.Add(btnGuardarEquipos);
+            Controls.Add(txtPais);
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(gvEquipos);
+            Controls.Add(btnObtenerEquipos);
+            Controls.Add(btnEliminarEquipo);
+            Controls.Add(btnCargarEquipo);
+            Controls.Add(txtEquipoACargar);
+            Controls.Add(gvResultados);
+            Controls.Add(label3);
+            Controls.Add(groupBox2);
+            Controls.Add(label1);
+            Controls.Add(btnCargarResultado);
+            Controls.Add(groupBox1);
+            Margin = new Padding(2);
+            Name = "Form1";
+            Text = "Admin de Resultados";
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)gvResultados).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)gvEquipos).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -379,9 +391,6 @@
         private TextBox txtEquipoVisitante;
         private ComboBox cboGolesVisitante;
         private DataGridView gvResultados;
-        private DataGridViewTextBoxColumn Local;
-        private DataGridViewTextBoxColumn Goles;
-        private DataGridViewTextBoxColumn Visitante;
         private ComboBox cboGolesLocal;
         private TextBox txtEquipoLocal;
         private Label label2;
@@ -398,5 +407,11 @@
         private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn Equipo;
         private DataGridViewTextBoxColumn Pais;
+        private Button btnGuardarResultados;
+        private DataGridViewTextBoxColumn IdRes;
+        private DataGridViewTextBoxColumn Local;
+        private DataGridViewTextBoxColumn gLocal;
+        private DataGridViewTextBoxColumn gVisitante;
+        private DataGridViewTextBoxColumn Visitante;
     }
 }
