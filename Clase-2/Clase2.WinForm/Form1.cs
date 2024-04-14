@@ -1,5 +1,6 @@
 using Clase2.Entidades;
 using Newtonsoft.Json;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Clase2.WinForm
@@ -9,87 +10,6 @@ namespace Clase2.WinForm
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void btnCargarResultado_Click(object sender, EventArgs e)
-        {
-            //ResultadoServicio resultadoServicio = new ResultadoServicio();
-            //resultadoServicio.Agregar(new Resultado
-            //{
-            //    EquipoLocal = txtEquipoLocal.Text,
-            //    EquipoVisitante = txtEquipoVisitante.Text,
-            //    GolesLocal = cboGolesLocal.Text,
-            //    GolesVisitante = cboGolesVisitante.Text
-            //});
-
-            EnviarResultadoAApi();
-
-
-            AgregarFila(gvResultados, txtEquipoLocal.Text, $"{cboGolesLocal.Text}-{cboGolesVisitante.Text}", txtEquipoVisitante.Text);
-            txtEquipoLocal.Text = txtEquipoVisitante.Text = "";
-        }
-
-        private void AgregarFila(DataGridView gv, string equipoLocal, string goles, string equipoVisitante)
-        {
-            // Crear una nueva fila
-            DataGridViewRow fila = new DataGridViewRow();
-            fila.CreateCells(gv);
-
-            // Asignar valores a las celdas de la fila
-            fila.Cells[0].Value = equipoLocal;
-            fila.Cells[1].Value = goles;
-            fila.Cells[2].Value = equipoVisitante;
-
-            // Agregar la fila al DataGridView
-            gv.Rows.Add(fila);
-        }
-
-        private async Task EnviarResultadoAApi()
-        {
-            // URL de destino
-            string url = "https://localhost:7169/api/Resultados";
-
-            // Contenido del cuerpo (en este caso, un JSON)
-            string jsonBody = $"{{\"equipoLocal\": \"{txtEquipoLocal.Text}\"," +
-                $"\"equipoVisitante\": \"{txtEquipoVisitante.Text}\"," +
-                $"\"golesLocal\": \"{cboGolesLocal.Text}\"," +
-                $"\"golesVisitante\": \"{cboGolesVisitante.Text}\"}}";
-
-            // Crear cliente HTTP
-            using (HttpClient client = new HttpClient())
-            {
-                // Configurar encabezados si es necesario (por ejemplo, para indicar el tipo de contenido)
-                client.DefaultRequestHeaders.Add("Accept", "application/json");
-                client.DefaultRequestHeaders.Add("User-Agent", "MyApp");
-
-                // Crear el contenido del cuerpo
-                HttpContent bodyContent = new StringContent(jsonBody, System.Text.Encoding.UTF8, "application/json");
-
-                try
-                {
-                    // Realizar la solicitud POST
-                    HttpResponseMessage response = await client.PostAsync(url, bodyContent);
-
-                    // Verificar si la solicitud fue exitosa (código de estado 200 OK)
-                    if (response.IsSuccessStatusCode)
-                    {
-                        // Leer la respuesta
-                        string responseBody = await response.Content.ReadAsStringAsync();
-                        Console.WriteLine("Respuesta del servidor:");
-                        Console.WriteLine(responseBody);
-                    }
-                    else
-                    {
-                        // Manejar errores de solicitud
-                        Console.WriteLine($"La solicitud falló con el código de estado: {response.StatusCode}");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // Manejar errores de red o de la solicitud
-                    Console.WriteLine($"Error al realizar la solicitud: {ex.Message}");
-                }
-            }
         }
 
         private void btnCargarEquipo_Click(object sender, EventArgs e)
@@ -182,7 +102,7 @@ namespace Clase2.WinForm
                         case "PUT":
                             response = await client.PutAsync(url, bodyContent);
                             break;
-                        // Aquí puedes agregar más casos para otros métodos HTTP si es necesario
+                            // Aquí puedes agregar más casos para otros métodos HTTP si es necesario
                     }
 
                     // Verificar si la solicitud fue exitosa (código de estado 200 OK)
@@ -311,7 +231,7 @@ namespace Clase2.WinForm
             gv.Rows.Add(fila);
         }
 
-        private void btnGuardarEquipos_Click(object sender, EventArgs e)
+        private async void btnGuardarEquipos_Click(object sender, EventArgs e)
         {
             //recorrer grilla y actualizar
             foreach (DataGridViewRow row in gvEquipos.Rows)
@@ -333,10 +253,189 @@ namespace Clase2.WinForm
                 };
 
                 // Llamar al método para actualizar el equipo en la API
-                ActualizarEquipoApi(equipo);
+                await ActualizarEquipoApi(equipo);
             }
 
             ObtenerEquiposApi();
+        }
+
+
+
+
+        // ACA EMPIEZA RESULTADOS
+
+
+
+
+
+        private void btnCargarResultado_Click(object sender, EventArgs e)
+        {
+            AgregarResultadoALaApi();
+        }
+
+        private void btnObtenerResultados_Click(object sender, EventArgs e)
+        {
+            ObtenerResultadosApi();
+        }
+
+        private async void btnGuardarResultados_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in gvResultados.Rows)
+            {
+                if (row.Cells[0].Value == null)
+                    continue;
+
+                string local = row.Cells[0].Value.ToString();
+                string goles = row.Cells[1].Value.ToString();
+                string visitante = row.Cells[2].Value.ToString();
+                string id = row.Cells[3].Value.ToString();
+                string[] partes = goles.Split('-');
+                string golesLocal = partes[0];
+                string golesVisitante = partes[1];
+
+                Resultado resultado = new Resultado
+                {
+                    Id = Int32.Parse(id),
+                    EquipoLocal = local,
+                    EquipoVisitante = visitante,
+                    GolesLocal = golesLocal,
+                    GolesVisitante = golesVisitante
+                };
+
+                await ActualizarResultadoApi(resultado);
+            }
+
+            ObtenerResultadosApi();
+        }
+
+        private async Task ActualizarResultadoApi(Resultado resultado)
+        {
+            string url = $"https://localhost:7169/api/Resultados";
+
+            string jsonBody = $"{{\"equipoLocal\": \"{resultado.EquipoLocal}\"," +
+                      $"\"equipoVisitante\": \"{resultado.EquipoVisitante}\"," +
+                      $"\"golesLocal\": \"{resultado.GolesLocal}\"," +
+                      $"\"golesVisitante\": \"{resultado.GolesVisitante}\"," + 
+                      $"\"id\": \"{resultado.Id}\"}}";
+
+            await RealizarSolicitudHttpAsync(url, HttpMethod.Put, jsonBody);
+        }
+
+        private async Task ObtenerResultadosApi()
+        {
+            string url = "https://localhost:7169/api/Resultados";
+
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.DefaultRequestHeaders.Add("Accept", "application/json");
+                    client.DefaultRequestHeaders.Add("User-Agent", "MyApp");
+
+                    HttpResponseMessage response = await client.GetAsync(url);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string responseBody = await response.Content.ReadAsStringAsync();
+
+                        List<Resultado> resultados = JsonConvert.DeserializeObject<List<Resultado>>(responseBody);
+
+                        gvResultados.Rows.Clear();
+
+                        foreach (var resultado in resultados)
+                        {
+                            AgregarFila(gvResultados, resultado);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"La solicitud falló con el código de estado: {response.StatusCode}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al realizar la solicitud: {ex.Message}");
+            }
+        }
+
+
+        private async Task AgregarResultadoALaApi()
+        {
+            string url = "https://localhost:7169/api/Resultados";
+            string jsonBody = $"{{\"equipoLocal\": \"{txtEquipoLocal.Text}\"," +
+                              $"\"equipoVisitante\": \"{txtEquipoVisitante.Text}\"," +
+                              $"\"golesLocal\": \"{cboGolesLocal.Text}\"," +
+                              $"\"golesVisitante\": \"{cboGolesVisitante.Text}\"}}";
+            await RealizarSolicitudHttpAsync(url, HttpMethod.Post, jsonBody);
+            ObtenerResultadosApi();
+        }
+
+        private async Task EliminarResultadoApi()
+        {
+            string resultadoId = ObtenerResultadoSeleccionadoId();
+
+            if (string.IsNullOrEmpty(resultadoId))
+            {
+                MessageBox.Show("Por favor, seleccione un resultado para eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                string url = $"https://localhost:7169/api/Resultados/{resultadoId}";
+
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.DeleteAsync(url);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Resultado eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        await ObtenerResultadosApi();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"La solicitud falló con el código de estado: {response.StatusCode}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al realizar la solicitud: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+        private void AgregarFila(DataGridView gv, Resultado resultado)
+        {
+            DataGridViewRow fila = new DataGridViewRow();
+            fila.CreateCells(gv);
+
+            fila.Cells[0].Value = resultado.EquipoLocal;
+            fila.Cells[1].Value = $"{resultado.GolesLocal}-{resultado.GolesVisitante}";
+            fila.Cells[2].Value = resultado.EquipoVisitante;
+            fila.Cells[3].Value = resultado.Id;
+
+            gv.Rows.Add(fila);
+        }
+
+        private String ObtenerResultadoSeleccionadoId()
+        {
+            if (gvResultados.CurrentRow != null)
+            {
+                return gvResultados.CurrentRow.Cells[3].Value.ToString();
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        private void btnEliminarResultado_Click(object sender, EventArgs e)
+        {
+            EliminarResultadoApi();
         }
     }
 }

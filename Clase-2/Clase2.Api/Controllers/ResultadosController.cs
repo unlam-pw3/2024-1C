@@ -31,8 +31,14 @@ namespace Clase2.Api.Controllers
         [HttpPut]
         public IActionResult Put([FromBody] Resultado resultado)
         {
+            var resultadoEncontrado = _resultadoServicio.ObtenerPorId(resultado.Id);
+            if (resultadoEncontrado == null)
+            {
+                return NotFound(); 
+            }
+
             _resultadoServicio.Actualizar(resultado);
-            return Ok();
+            return Ok(); 
         }
 
         [HttpDelete("{id}")]
