@@ -28,10 +28,10 @@ namespace Clase2.Api.Controllers
             return StatusCode(StatusCodes.Status201Created, equipoAgregado);
         }
 
-        [HttpDelete("{nombre_equipo}")]
-        public IActionResult Delete(string nombre_equipo)
+        [HttpDelete("{idEquipo}")]
+        public IActionResult Delete(int idEquipo)
         {
-            var equipoEncontrado = _equipoServicio.ObtenerEquipoPorNombre(nombre_equipo);
+            var equipoEncontrado = _equipoServicio.ObtenerEquipoPorId(idEquipo);
             if (equipoEncontrado == null)
             {
                 return NotFound(); // Devolver 404 si el equipo no se encuentra
