@@ -1,6 +1,6 @@
-﻿using Clase4.MVC.Web.Models;
+﻿using Clase4.MVC.Entidades;
 
-namespace Clase4.MVC.Web.Servicios;
+namespace Clase4.MVC.Servicios;
 
 public interface IFeriadosService
 {
@@ -35,5 +35,3 @@ public class FeriadosService : IFeriadosService
         return Lista;
     }
 }
-
-

@@ -1,4 +1,5 @@
-﻿using Clase4.MVC.Web.Servicios;
+﻿using Clase4.MVC.Servicios;
+using Clase4.MVC.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clase4.MVC.Web.Controllers;
@@ -14,6 +15,6 @@ public class FeriadosController : Controller
     public IActionResult Index()
     {
         var feriados = _feriadosService.ObtenerFeriados();
-        return View(feriados);
+        return View(FeriadoModel.MapToModel(feriados));
     }
 }

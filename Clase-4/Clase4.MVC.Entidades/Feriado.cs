@@ -1,4 +1,4 @@
-﻿namespace Clase4.MVC.Web.Models;
+﻿namespace Clase4.MVC.Entidades;
 
 public class Feriado
 {
