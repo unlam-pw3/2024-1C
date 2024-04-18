@@ -1,5 +1,5 @@
-# 2024-1c Clase 4-Practica
-## En Clase Administrador de Resultados (WinForms + API)
+# 2024-1c Clase 4-Practica (Intro a MVC)
+## En Clase Creamos un proyecto MVC para visualizar feriados y dias laborables
 - Creamos una aplication MVC
 - Agregamos logica para mostrar los feriados de Argentina y dias laborables
 ![Lista Feriados](1.Feriados.png?raw=true "Lista Feriados")
