@@ -5,6 +5,7 @@ namespace Clase4.MVC.Servicios;
 public interface IFeriadosService
 {
     List<Feriado> ObtenerFeriados();
+    bool EsFeriado(int dia, int mes);
 }
 public class FeriadosService : IFeriadosService
 {
@@ -33,5 +34,10 @@ public class FeriadosService : IFeriadosService
     public List<Feriado> ObtenerFeriados()
     {
         return Lista;
+    }
+
+    public bool EsFeriado(int dia, int mes)
+    {
+        return Lista.Any(f => f.Fecha.Day == dia && f.Fecha.Month == mes);
     }
 }

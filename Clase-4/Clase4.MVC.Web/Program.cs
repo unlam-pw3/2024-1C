@@ -31,4 +31,14 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.MapControllerRoute(
+    name: "diaMes",
+    pattern: "{controller}/{action}/{dia}/{mes}");
+
+//si solo quiero que la regla re routing aplique a un controlador en particular
+//app.MapControllerRoute(
+//    name: "esFeriado",
+//    pattern: "Feriados/{action=EsFeriado}/{dia}/{mes}",
+//    defaults: new { controller = "Feriados" });
+
 app.Run();

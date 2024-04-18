@@ -17,4 +17,15 @@ public class FeriadosController : Controller
         var feriados = _feriadosService.ObtenerFeriados();
         return View(FeriadoModel.MapToModel(feriados));
     }
+
+    public IActionResult EsFeriado(int dia, int mes)
+    {
+        EsFeriadoModel esFeriadoModel = new EsFeriadoModel
+        {
+            Dia = dia,
+            Mes = mes,
+            EsFeriado = _feriadosService.EsFeriado(dia, mes)
+        };
+        return View(esFeriadoModel);
+    }
 }
