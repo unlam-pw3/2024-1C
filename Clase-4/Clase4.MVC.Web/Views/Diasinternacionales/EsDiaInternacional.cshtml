@@ -1,0 +1,47 @@
+﻿@using System.Globalization
+@model DiaDescripcionModel
+@{
+    string titulo = Model.Verificacion ? "Día Internacional" : "Día Internacional no cargado";
+    string descripcion = Model.Descripcion;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@titulo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>@titulo</h2>
+        <p>@Model.Dia de @(new DateTime(2024, Model.Mes, Model.Dia).ToString("MMMM", CultureInfo.CreateSpecificCulture("es-ar")))</p>
+        @if (Model.Verificacion)
+        {
+            <p>@descripcion</p>
+        }
+        else
+        {
+            <p>No se ha cargado una descripción para este día internacional.</p>
+        }
+    </div>
+</body>
+</html>
