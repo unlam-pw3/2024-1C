@@ -1,0 +1,8 @@
+﻿@using System.Globalization
+@model QueDiaInternacionalEsModel
+@{
+}
+<h2>@Model.QueDiaEs</h2>
+<p>@Model.Dia de @(new DateTime(DateTime.Now.Year, Model.Mes, Model.Dia).ToString("MMMM", CultureInfo.CreateSpecificCulture("es-ar")))</p>
+
+
