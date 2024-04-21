@@ -1,0 +1,31 @@
+﻿@using System.Globalization
+@model Clase4.MVC.Web.Models.DiaInternacionalModel
+@{
+}
+
+@if (Model != null && !string.IsNullOrEmpty(Model.Categoria))
+{
+    <h2>@Model.Categoria</h2>
+}
+else
+{
+    <h2>Parece que no hay un día para todo</h2>
+}
+
+<p>@Model.Fecha de @(new DateTime(2024, Model.Fecha.Month, Model.Fecha.Day).ToString("MMMM", CultureInfo.CreateSpecificCulture("es-AR")))</p>
+
+@if (Model != null)
+{
+    <form method="post" action="@Url.Action("FiltrarPorCategoria", "DiasInternacionales")">
+        <label for="categoria">Seleccione una categoría:</label>
+        <select name="categoria" id="categoria">
+            <option value="Social">Social</option>
+            <option value="Ambiental">Ambiental</option>
+            <option value="Alimentación">Alimentación</option>
+            <option value="Cultural">Cultural</option>
+            <option value="Tecnología">Tecnología</option>
+            <option value="Gastronomía">Gastronomía</option>
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
+}

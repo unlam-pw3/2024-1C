@@ -1,0 +1,12 @@
+﻿@using System.Globalization
+@model IEnumerable<Clase4.MVC.Web.Models.DiaInternacionalModel>
+@{
+}
+
+<h2>Días Internacionales</h2>
+<ul>
+    @foreach (var dia in Model)
+    {
+        <li>@dia.Fecha.Day de @dia.Fecha.ToString("MMMM", CultureInfo.CreateSpecificCulture("es-AR")) (@dia.Fecha.ToString("dddd", CultureInfo.CreateSpecificCulture("es-AR"))) - @dia.Titulo: @dia.Descripcion (@dia.Categoria ?? "Sin categoría")</li>
+    }
+</ul>
