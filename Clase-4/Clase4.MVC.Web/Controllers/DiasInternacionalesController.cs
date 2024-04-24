@@ -1,4 +1,5 @@
-﻿using Clase4.MVC.Servicios;
+﻿using Clase4.MVC.Entidades;
+using Clase4.MVC.Servicios;
 using Clase4.MVC.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,5 +17,11 @@ public class DiasInternacionalesController : Controller
     {
         var diasInternacionales = _diasInternacionalesService.ObtenerDiasInternacionales();
         return View(DiaInternacionalModel.MapToModel(diasInternacionales));
+    }
+
+    public IActionResult DiaInternacional(int dia, int mes)
+    {
+        var diaInternacional = _diasInternacionalesService.ObtenerDiaInternacional(dia, mes);
+        return View(new DiaInternacionalModel(diaInternacional));
     }
 }
