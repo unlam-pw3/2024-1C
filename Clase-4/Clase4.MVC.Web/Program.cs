@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<IFeriadosService, FeriadosService>();
+builder.Services.AddSingleton<IDiasInternacionalesServicio,DiasInternacionalesServicio>();
 
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
