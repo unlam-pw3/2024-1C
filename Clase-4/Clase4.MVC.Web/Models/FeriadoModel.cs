@@ -2,16 +2,14 @@
 
 namespace Clase4.MVC.Web.Models;
 
-public class FeriadoModel
+public class FeriadoModel : DiaEspecialModel
 {
-    public DateTime Fecha { get; set; }
-    public string Descripcion { get; set; }
     public bool EsInamovible { get; set; }
 
     public FeriadoModel(Feriado feriado)
     {
         Fecha = feriado.Fecha;
-        Descripcion = feriado.Descripcion;
+        Nombre = feriado.Nombre;
         EsInamovible = feriado.EsInamovible;
     }
 
