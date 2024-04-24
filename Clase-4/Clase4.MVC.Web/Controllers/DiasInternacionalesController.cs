@@ -22,6 +22,7 @@ public class DiasInternacionalesController : Controller
     public IActionResult DiaInternacional(int dia, int mes)
     {
         var diaInternacional = _diasInternacionalesService.ObtenerDiaInternacional(dia, mes);
-        return View(new DiaInternacionalModel(diaInternacional));
+
+        return View(DiaInternacionalModel.MapOneToModel(diaInternacional));
     }
 }

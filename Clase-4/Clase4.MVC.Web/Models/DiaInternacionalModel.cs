@@ -19,4 +19,9 @@ public class DiaInternacionalModel
     {
         return diasInternacionales.Select(d => new DiaInternacionalModel(d)).ToList();
     }
+
+    public static DiaInternacionalModel? MapOneToModel(DiaInternacional diaInternacional)
+    {
+        return diaInternacional != null ? new DiaInternacionalModel(diaInternacional) : null;
+    }
 }
