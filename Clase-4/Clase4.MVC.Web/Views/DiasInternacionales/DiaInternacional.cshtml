@@ -1,0 +1,6 @@
+﻿@using System.Globalization
+@model DiaInternacionalModel
+@{
+}
+<h2>@( Model.NombreDia != null ? "Hoy es el " + @Model.NombreDia : "Ups! El día ingresado no se encuentra en nuestra base de datos." )</h2>
+<p>@( Model.Descripcion != null ? Model.Descripcion : "Muy pronto lo agregaremos :D" )</p>
