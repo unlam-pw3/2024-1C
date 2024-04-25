@@ -6,6 +6,7 @@ public interface IFeriadosService
 {
     List<Feriado> ObtenerFeriados();
     bool EsFeriado(int dia, int mes);
+    void CrearFeriado(DateTime feriadoModelFecha, string feriadoModelNombre, bool feriadoModelEsInamovible);
 }
 public class FeriadosService : IFeriadosService
 {
@@ -39,5 +40,10 @@ public class FeriadosService : IFeriadosService
     public bool EsFeriado(int dia, int mes)
     {
         return Lista.Any(f => f.Fecha.Day == dia && f.Fecha.Month == mes);
+    }
+
+    public void CrearFeriado(DateTime feriadoModelFecha, string feriadoModelNombre, bool feriadoModelEsInamovible)
+    {
+        Lista.Add(new Feriado { Fecha = feriadoModelFecha, Nombre = feriadoModelNombre, EsInamovible = feriadoModelEsInamovible });
     }
 }

@@ -5,3 +5,8 @@
 <div>
     @RenderBody()
 </div>
+
+@section Scripts
+{
+    @await RenderSectionAsync("Scripts", required: false)
+}

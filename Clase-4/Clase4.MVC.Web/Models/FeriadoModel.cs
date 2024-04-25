@@ -6,6 +6,10 @@ public class FeriadoModel : DiaEspecialModel
 {
     public bool EsInamovible { get; set; }
 
+    public FeriadoModel()
+    {
+        
+    }
     public FeriadoModel(Feriado feriado)
     {
         Fecha = feriado.Fecha;
