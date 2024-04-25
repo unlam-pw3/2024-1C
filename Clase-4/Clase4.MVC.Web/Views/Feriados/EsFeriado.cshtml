@@ -1,6 +1,7 @@
 ﻿@using System.Globalization
 @model EsFeriadoModel
 @{
+    Layout = "_CalendarioLayout";
 }
 <h2>@(Model.EsFeriado ? "Es Feriado" : "No es Feriado")</h2>
 <p>@Model.Dia de @(new DateTime(2024, Model.Mes, Model.Dia).ToString("MMMM",CultureInfo.CreateSpecificCulture("es-ar")))</p>

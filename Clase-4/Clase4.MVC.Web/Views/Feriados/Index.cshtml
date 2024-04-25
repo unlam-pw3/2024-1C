@@ -1,12 +1,16 @@
 ﻿@using System.Globalization
 @model IEnumerable<Clase4.MVC.Web.Models.FeriadoModel>
 @{
+    Layout = "_CalendarioLayout";
 }
 
 <h2>Feriados</h2>
+<a href="/Feriados/Crear">Agregar Feriado</a>
 <ul>
 @foreach (var feriado in Model)
-{
-    <li>@feriado.Fecha.Day de @feriado.Fecha.ToString("MMMM",CultureInfo.CreateSpecificCulture("es-ar")) (@feriado.Fecha.ToString("dddd",CultureInfo.CreateSpecificCulture("es-ar"))) - @feriado.Descripcion (@(feriado.EsInamovible ? "Inamovible" : "Trasladable"))</li>
-}
+    {
+        <li>
+            <partial name="DiaEspecialEnListadoPartial" for="@feriado" /> (@(feriado.EsInamovible ? "Inamovible" : "Trasladable"))
+        </li>
+    }
 </ul>

@@ -1,0 +1,27 @@
+﻿@model Clase4.MVC.Web.Models.FeriadoModel
+@{
+    Layout = "_CalendarioLayout";
+}
+<h3>Agregar Feriado</h3>
+
+<form action="/Feriados/Crear" method="post">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(model => model.Fecha)
+        @Html.TextBoxFor(model => model.Fecha, new { @class = "form-control", type="date" })
+        @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })        
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nombre)
+        @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label for="EsInamovible">Es Inamovible</label>
+        @Html.CheckBoxFor(model => model.EsInamovible)
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+}

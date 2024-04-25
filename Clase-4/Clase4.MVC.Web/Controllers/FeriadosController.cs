@@ -18,6 +18,22 @@ public class FeriadosController : Controller
         return View(FeriadoModel.MapToModel(feriados));
     }
 
+    public IActionResult Crear()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Crear(FeriadoModel feriadoModel)
+    {
+        if (!ModelState.IsValid)
+            return View(feriadoModel);
+
+        _feriadosService.CrearFeriado(feriadoModel.Fecha, feriadoModel.Nombre, feriadoModel.EsInamovible);
+        return RedirectToAction("Index");
+    }
+
     public IActionResult EsFeriado(int dia, int mes)
     {
         EsFeriadoModel esFeriadoModel = new EsFeriadoModel

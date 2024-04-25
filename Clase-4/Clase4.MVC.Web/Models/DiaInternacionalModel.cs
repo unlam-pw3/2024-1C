@@ -2,16 +2,12 @@
 
 namespace Clase4.MVC.Web.Models;
 
-public class DiaInternacionalModel
+public class DiaInternacionalModel : DiaEspecialModel
 {
-    public DateTime Fecha { get; set; }
-    public string NombreDia { get; set; }
-    public string Descripcion { get; set; }
-
     public DiaInternacionalModel(DiaInternacional diaInternacional)
     {
         Fecha = diaInternacional.Fecha;
-        NombreDia = diaInternacional.NombreDia;
+        Nombre = diaInternacional.NombreDia;
         Descripcion = diaInternacional.Descripcion;
     }
 
