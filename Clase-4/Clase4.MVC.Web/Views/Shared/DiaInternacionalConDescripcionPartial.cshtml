@@ -1,0 +1,6 @@
+﻿@using System.Globalization
+@model Clase4.MVC.Web.Models.DiaEspecialModel
+
+
+<h3>@(Model.Nombre != null ? "Hoy es el " + @Model.Nombre : "Ups! El día ingresado no se encuentra en nuestra base de datos.")</h3>
+<p>@(Model.Descripcion != null ? Model.Descripcion : "Muy pronto lo agregaremos :D")</p>

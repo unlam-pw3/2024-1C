@@ -1,7 +1,8 @@
 ﻿@using System.Globalization
 @model DiaInternacionalModel
 @{
-    Layout = "_CalendarioLayout";
+    Layout = "_DiaInternacionalNuevoLayout";
 }
-<h2>@( Model.Nombre != null ? "Hoy es el " + @Model.Nombre : "Ups! El día ingresado no se encuentra en nuestra base de datos." )</h2>
-<p>@( Model.Descripcion != null ? Model.Descripcion : "Muy pronto lo agregaremos :D" )</p>
+
+<partial name="DiaInternacionalConDescripcionPartial"/>
+

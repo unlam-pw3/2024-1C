@@ -36,6 +36,8 @@ public class DiasInternacionalesService : IDiasInternacionalesService
 
     public DiaInternacional ObtenerDiaInternacional(int dia, int mes)
     {
-        return Lista.First(d => d.Fecha.Day == dia && d.Fecha.Month == mes);
+        var diaInternacional = Lista.FirstOrDefault(d => d.Fecha.Day == dia && d.Fecha.Month == mes);
+
+        return diaInternacional;
     }
 }
