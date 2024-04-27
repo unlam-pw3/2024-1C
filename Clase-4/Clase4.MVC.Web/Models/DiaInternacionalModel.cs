@@ -20,6 +20,11 @@ public class DiaInternacionalModel : DiaEspecialModel
         }
     }
 
+    public DiaInternacionalModel()
+    {
+
+    }
+
     public static List<DiaInternacionalModel> MapToModel(List<DiaInternacional> diasInternacionales)
     {
         return diasInternacionales.Select(d => new DiaInternacionalModel(d)).ToList();
