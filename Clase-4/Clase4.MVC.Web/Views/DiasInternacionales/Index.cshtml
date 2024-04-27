@@ -5,11 +5,12 @@
 }
 
 <h2>Dias Internacionales</h2>
+<a href="/DiasInternacionales/Crear">Agregar Día Internacional</a>
 <ul>
 @foreach (var diaInternacional in Model)
 {
         <li>
-            <partial name="DiaEspecialEnListadoPartial" for="@diaInternacional" />
+            <partial name="DiaEspecialEnListadoPartial" for="@diaInternacional" /> - @diaInternacional.Descripcion
         </li>
 }
 </ul>

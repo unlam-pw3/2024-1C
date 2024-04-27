@@ -9,5 +9,7 @@ public class DiaEspecialModel
     [Required(ErrorMessage = "¡El nombre es requerido!")]
     [StringLength(50, ErrorMessage = "¡El nombre no puede superar los 50 caracteres!")]
     public string Nombre { get; set; }
+    [Required(ErrorMessage = "Debe agregar una descripción")]
+    [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "La descripción ingresada no es válida")]
     public string? Descripcion { get; set; }
 }
