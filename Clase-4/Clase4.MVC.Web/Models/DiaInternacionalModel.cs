@@ -4,11 +4,27 @@ namespace Clase4.MVC.Web.Models;
 
 public class DiaInternacionalModel : DiaEspecialModel
 {
+
+    public DiaInternacionalModel()
+    {
+        
+    }
     public DiaInternacionalModel(DiaInternacional diaInternacional)
     {
-        Fecha = diaInternacional.Fecha;
-        Nombre = diaInternacional.NombreDia;
-        Descripcion = diaInternacional.Descripcion;
+        if(diaInternacional != null)
+        {
+            Fecha = diaInternacional.Fecha;
+            Nombre = diaInternacional.NombreDia;
+            Descripcion = diaInternacional.Descripcion;
+        }
+        else
+        {
+            Fecha = DateTime.MinValue;
+            Nombre = null;
+            Descripcion = null;
+        
+        }
+        
     }
 
     public static List<DiaInternacionalModel> MapToModel(List<DiaInternacional> diasInternacionales)
