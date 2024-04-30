@@ -4,6 +4,12 @@ namespace Clase4.MVC.Web.Models;
 
 public class DiaInternacionalModel : DiaEspecialModel
 {
+
+    public DiaInternacionalModel()
+    {
+
+    }
+
     public DiaInternacionalModel(DiaInternacional diaInternacional)
     {
         Fecha = diaInternacional.Fecha;

@@ -6,6 +6,7 @@ public interface IDiasInternacionalesService
 {
     List<DiaInternacional> ObtenerDiasInternacionales();
     DiaInternacional ObtenerDiaInternacional(int dia, int mes);
+    void CrearDiaInternacional(DateTime fecha, string descripcion, string nombre);
 }
 public class DiasInternacionalesService : IDiasInternacionalesService
 {
@@ -37,5 +38,10 @@ public class DiasInternacionalesService : IDiasInternacionalesService
     public DiaInternacional ObtenerDiaInternacional(int dia, int mes)
     {
         return Lista.First(d => d.Fecha.Day == dia && d.Fecha.Month == mes);
+    }
+
+    public void CrearDiaInternacional(DateTime fecha, string descripcion, string nombre)
+    {
+        Lista.Add(new DiaInternacional { Fecha = fecha, NombreDia = nombre, Descripcion = descripcion });
     }
 }

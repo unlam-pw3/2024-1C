@@ -24,4 +24,20 @@ public class DiasInternacionalesController : Controller
         var diaInternacional = _diasInternacionalesService.ObtenerDiaInternacional(dia, mes);
         return View(new DiaInternacionalModel(diaInternacional));
     }
+
+    public IActionResult Crear()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Crear(DiaInternacionalModel diaInternacionalModel)
+    {
+        if (!ModelState.IsValid)
+            return View(diaInternacionalModel);
+
+        _diasInternacionalesService.CrearDiaInternacional(diaInternacionalModel.Fecha, diaInternacionalModel.Descripcion, diaInternacionalModel.Nombre);
+        return RedirectToAction("Index");
+    }
 }
