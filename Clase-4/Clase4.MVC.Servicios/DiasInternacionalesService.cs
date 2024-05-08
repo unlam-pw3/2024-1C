@@ -32,7 +32,7 @@ public class DiasInternacionalesService : IDiasInternacionalesService
     }
     public List<DiaInternacional> ObtenerDiasInternacionales()
     {
-        return Lista;
+        return Lista.OrderBy(d => d.Fecha).ToList();
     }
 
     public DiaInternacional ObtenerDiaInternacional(int dia, int mes)
