@@ -1,0 +1,27 @@
+﻿@model VentaModel
+
+<form action="/Ventas/RegistrarVenta" method="post">
+    <div class="form-group">
+        @Html.LabelFor(model => model.Cliente)
+        @Html.TextBoxFor(model => model.Cliente, new { @class = "form-control", type="text" })
+        @Html.ValidationMessageFor(model => model.Cliente, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CantidadVendida)
+        @Html.TextBoxFor(model => model.CantidadVendida, new { @class = "form-control", type="number" })
+        @Html.ValidationMessageFor(model => model.CantidadVendida, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PrecioUnitario)
+        @Html.TextBoxFor(model => model.PrecioUnitario, new { @class = "form-control", type="number" })
+        @Html.ValidationMessageFor(model => model.PrecioUnitario, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Registrar Venta</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+}
