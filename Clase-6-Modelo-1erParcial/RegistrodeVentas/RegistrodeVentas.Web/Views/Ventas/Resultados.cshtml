@@ -1,0 +1,29 @@
+﻿@model List<VentaModel>
+
+<h1>Resultados</h1>
+<div>
+    <a href="/Ventas/RegistrarVenta">Registrar Venta</a>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>#IdVenta</th>
+            <th>Cliente</th>
+            <th>Cantidad Vendida</th>
+            <th>Precio Unitario ($)</th>
+            <th>Total Venta</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var venta in Model)
+        {
+            <tr>
+                <td>@venta.IdVenta</td>
+                <td>@venta.Cliente</td>
+                <td>@venta.CantidadVendida</td>
+                <td>@venta.PrecioUnitario</td>
+                <td>$ @(venta.TotalVenta)</td>
+            </tr>
+        }
+    </tbody>
+</table>
