@@ -6,9 +6,23 @@ public class DiaInternacionalModel : DiaEspecialModel
 {
     public DiaInternacionalModel(DiaInternacional diaInternacional)
     {
-        Fecha = diaInternacional.Fecha;
-        Nombre = diaInternacional.NombreDia;
-        Descripcion = diaInternacional.Descripcion;
+        if (diaInternacional != null)
+        {
+            Fecha = diaInternacional.Fecha;
+            Nombre = diaInternacional.NombreDia;
+            Descripcion = diaInternacional.Descripcion;
+        }
+        else
+        {
+            Fecha = DateTime.MinValue;
+            Nombre = null;
+            Descripcion = null;
+        }
+    }
+
+    public DiaInternacionalModel()
+    {
+
     }
 
     public static List<DiaInternacionalModel> MapToModel(List<DiaInternacional> diasInternacionales)
