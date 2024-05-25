@@ -42,7 +42,7 @@ public partial class TesoroContext : DbContext
             entity.ToTable("Ubicacion");
 
             entity.Property(e => e.Nombre)
-                .HasMaxLength(10)
+                .HasMaxLength(100)
                 .IsUnicode(false);
         });
 
