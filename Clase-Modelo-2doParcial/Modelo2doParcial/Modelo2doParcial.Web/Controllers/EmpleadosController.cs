@@ -44,6 +44,9 @@ namespace Modelo2doParcial.Web.Controllers
         {
             ViewBag.Sucursales = _sucursalesServicio.Listar();
 
+            if (!ModelState.IsValid)
+                return View(empleado);
+            
             _empleadosServicio.CrearEmpleado(empleado);
 
             return RedirectToAction("Index");
