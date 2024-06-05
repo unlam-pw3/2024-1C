@@ -1,0 +1,59 @@
+﻿@using Modelo2doParcial.Entidades.EF
+@model List<Modelo2doParcial.Entidades.EF.Empleado>
+
+@{
+    ViewBag.Title = "Empleados";
+}
+
+
+<h2>Empleados</h2>
+
+<form action="/Empleados/Index" method="post">
+    <div>
+        Sucursal:
+        <select name="IdSucursal">
+            <option value="">Todas</option>
+            @foreach (Sucursal sucursal in ViewBag.Sucursales)
+            {
+                if (ViewBag.IdSucursalElegida == sucursal.IdSucursal)
+                {
+                    <option selected="selected" value="@sucursal.IdSucursal">@sucursal.Direccion</option>
+                }
+                else
+                {
+                    <option value="@sucursal.IdSucursal">@sucursal.Direccion</option>
+                }
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].IdEmpleado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].NombreCompleto)
+            </th>
+            <th>
+                Sucursal
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdEmpleado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreCompleto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdSucursalNavigation.Direccion)
+                </td>
+            </tr>
+        }
+    </table>
+</form>
