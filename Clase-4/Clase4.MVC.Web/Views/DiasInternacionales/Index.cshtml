@@ -1,7 +1,7 @@
 ﻿@using System.Globalization
 @model IEnumerable<Clase4.MVC.Web.Models.DiaInternacionalModel>
 @{
-    Layout = "_CalendarioLayout";
+    Layout = "_CustomLayout";
 }
 
 <h2>Dias Internacionales</h2>
@@ -10,7 +10,7 @@
 @foreach (var diaInternacional in Model)
 {
         <li>
-            <partial name="DiaEspecialEnListadoPartial" for="@diaInternacional" />
+            <partial name="DiaInternacionalEnListadoPartial" for="@diaInternacional" /> (@(diaInternacional.Nombre))
         </li>
 }
 </ul>
